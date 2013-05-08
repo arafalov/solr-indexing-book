@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema version="1.5">
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
+    <field name="addr_from" type="email" indexed="true" stored="true" required="true"/>
+    <field name="addr_to" type="email" multiValued="true" indexed="true" stored="true" required="true"/>
+    <field name="subject" type="string" indexed="true" stored="true" required="true"/>
+    <field name="date" type="string" indexed="true" stored="true" required="true" />
+    <field name="message" type="string" indexed="true" stored="true" required="true" />
+    <field name="priority" type="int" indexed="true" stored="true" />
+    <field name="text" type="text_general" multiValued="true" indexed="true" stored="false" />
+    <copyField source="message" dest="text" />
+    <copyField source="subject" dest="text" />
+    <copyField source="addr_*" dest="text" />
+  </fields>
+  <uniqueKey>id</uniqueKey>
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="email" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.UAX29URLEmailTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+  </types>
+</schema>
+

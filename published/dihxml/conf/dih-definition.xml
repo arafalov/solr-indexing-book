@@ -1,0 +1,23 @@
+<dataConfig>
+  <dataSource name="fileDS" type="FileDataSource" encoding="UTF-8"/>
+  <document>
+    <entity name="emails" 
+       dataSource="fileDS"
+       processor="XPathEntityProcessor"
+       url="${solr.solr.home}/dihxml/updatexml.xml"
+       forEach="/add/doc"
+       transformer="TemplateTransformer, DateFormatTransformer"
+       preImportDeleteQuery="type:acme"
+    >
+      <field column="id" xpath="/add/doc/field[@name='id']"/>
+      <field column="addr_from" xpath="/add/doc/field[@name='addr_from']"/>
+      <field column="addr_to" xpath="/add/doc/field[@name='addr_to']"/>
+      <field column="addr_cc" xpath="/add/doc/field[@name='addr_cc']"/>
+      <field column="subject" xpath="/add/doc/field[@name='subject']"/>
+      <field column="message" xpath="/add/doc/field[@name='message']"/>
+      <field column="date" xpath="/add/doc/field[@name='date']" dateTimeFormat="dd MMM yyyy"/>
+      <field column="priority"  xpath="/add/doc/field[@name='priority']"/>
+      <field column="type" template="acme"/>
+    </entity>
+  </document>
+</dataConfig>

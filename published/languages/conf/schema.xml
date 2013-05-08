@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema version="1.5">
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
+    <field name="addr_from" type="email" indexed="true" stored="true" required="true"/>
+    <dynamicField name="addr_*" type="email" multiValued="true" indexed="true" stored="true" />
+    <field name="subject" type="text_general" indexed="true" stored="true" />
+    <field name="date" type="string" indexed="true" stored="true" required="true" />
+    <field name="message" type="text_general" indexed="true" stored="true" />
+    <field name="priority" type="int" indexed="true" stored="true" />
+    <field name="text" type="text_general" multiValued="true" indexed="true" stored="false" />
+    <copyField source="message" dest="text" />
+    <copyField source="subject" dest="text" />
+    <copyField source="addr_*" dest="text" />
+    <field name="facet_contacts" type="address_noemail" multiValued="true" indexed="true" stored="false" />
+    <field name="facet_emails"   type="address_email"   multiValued="true" indexed="true" stored="false" />
+    <copyField source="addr_*" dest="facet_contacts" />
+    <copyField source="addr_*" dest="facet_emails" />
+    <field name="language" type="string" stored="true" indexed="true" />
+    <dynamicField name="*_en" type="text_en" stored="true" indexed="true" />
+    <dynamicField name="*_ru" type="text_ru" stored="true" indexed="true" />
+  </fields>
+  <uniqueKey>id</uniqueKey>
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="email" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.UAX29URLEmailTokenizerFactory"/>
+        <filter class="solr.ICUFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.ICUFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="address_noemail" class="solr.TextField">
+      <analyzer type="index">
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern=" &lt;.*" replacement="" />
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+      </analyzer>
+    </fieldType>
+    <fieldType name="address_email" class="solr.TextField">
+      <analyzer>
+        <tokenizer class="solr.UAX29URLEmailTokenizerFactory"/>
+        <filter class="solr.TypeTokenFilterFactory" types="filter_email.txt" enablePositionIncrements="true" useWhitelist="true"/>
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords_en.txt" enablePositionIncrements="true" />
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.EnglishPossessiveFilterFactory"/>
+        <filter class="solr.PorterStemFilterFactory"/>
+      </analyzer>
+    </fieldType>
+ 
+    <fieldType name="text_ru" class="solr.TextField" positionIncrementGap="100">
+      <analyzer> 
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords_ru.txt" format="snowball" enablePositionIncrements="true"/>
+        <filter class="solr.RussianLightStemFilterFactory"/>
+      </analyzer>
+    </fieldType>
+  </types>
+</schema>

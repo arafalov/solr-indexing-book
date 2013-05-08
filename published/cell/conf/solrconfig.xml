@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <lib dir="${user.dir}/../dist/" regex="solr-cell-\d.*\.jar" />
+  <lib dir="${user.dir}/../contrib/extraction/lib" regex=".*\.jar" />
+
+  <luceneMatchVersion>LUCENE_43</luceneMatchVersion>
+  <requestDispatcher handleSelect="false">
+    <requestParsers enableRemoteStreaming="true" multipartUploadLinkInKB="2048000" />
+    <httpCaching never304="true" />
+  </requestDispatcher>
+  <requestHandler name="/select" class="solr.SearchHandler" />
+  <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+  <requestHandler name="/admin" class="solr.admin.AdminHandlers" />
+  <requestHandler name="/analysis/field" class="solr.FieldAnalysisRequestHandler" startup="lazy" />
+  <requestHandler name="/update/extract" class="solr.extraction.ExtractingRequestHandler" >
+    <lst name="defaults">
+      <str name="uprefix">s_meta_</str>
+      <str name="fmap.content">t_content</str>
+      <str name="fmap.dcterms:created">d_created</str>
+    </lst>
+  </requestHandler>
+</config>
+

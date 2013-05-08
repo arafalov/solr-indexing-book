@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema version="1.5">
+  <fields>
+    <dynamicField name="s_*" type="string" indexed="true" stored="true" multiValued="true" />
+    <dynamicField name="t_*" type="text_stemmed" indexed="true" stored="true" />
+    <copyField source="t_content" dest="t_teaser" maxChars="2000" />
+     
+    <field name="d_timestamp"  type="date" indexed="true" stored="true"  multiValued="false" default="NOW" />
+    <dynamicField name="d_*" type="date" indexed="true" stored="true" multiValued="false" />
+  </fields>
+<types>
+  <fieldType name="string" class="solr.StrField" />
+  <fieldType name="date" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0"/>
+  <fieldType name="text_stemmed" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.EnglishMinimalStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+</types>
+</schema>

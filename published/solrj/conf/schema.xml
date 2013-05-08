@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema version="1.5">
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
+    <field name="addr_from" type="string" indexed="true" stored="true" required="true"/>
+    <field name="addr_to" type="string" multiValued="true" indexed="true" stored="true" required="true"/>
+    <field name="subject" type="string" indexed="true" stored="true" required="true"/>
+  </fields>
+  <uniqueKey>id</uniqueKey>
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+  </types>
+</schema>
+

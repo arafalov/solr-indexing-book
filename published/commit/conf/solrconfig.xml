@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <luceneMatchVersion>LUCENE_43</luceneMatchVersion>
+  <requestDispatcher handleSelect="false">
+    <httpCaching never304="true" />
+  </requestDispatcher>
+  <requestHandler name="/select" class="solr.SearchHandler" />
+  <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+  <requestHandler name="/admin" class="solr.admin.AdminHandlers" />
+  <requestHandler name="/analysis/field" class="solr.FieldAnalysisRequestHandler" startup="lazy" />
+  <requestHandler name="/get" class="solr.RealTimeGetHandler">
+    <lst name="defaults">
+      <str name="omitHeader">true</str>
+      <str name="wt">json</str>
+      <str name="indent">true</str>
+    </lst>
+  </requestHandler>
+
+<updateHandler class="solr.DirectUpdateHandler2">
+  <updateLog>
+   <str name="dir">${solr.ulog.dir:}</str>
+  </updateLog>
+
+  <autoSoftCommit>
+    <maxTime>60000</maxTime>
+  </autoSoftCommit>
+
+  <autoCommit>
+    <maxTime>300000</maxTime>
+     <openSearcher>false</openSearcher>
+  </autoCommit>
+</updateHandler>
+</config>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <lib dir="${user.dir}/../contrib/analysis-extras/lucene-libs/" />
+  <lib dir="${user.dir}/../contrib/analysis-extras/lib/" />
+
+  <luceneMatchVersion>LUCENE_43</luceneMatchVersion>
+  <requestDispatcher handleSelect="false">
+    <httpCaching never304="true" />
+  </requestDispatcher>
+
+  <requestHandler name="/select" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="defType">edismax</str>
+      <str name="qf">addr_from^10 addr_to addr_cc subject message</str>
+      <str name="df">text</str>
+      <str name="wt">ruby</str>
+      <str name="indent">true</str>
+    </lst>
+  </requestHandler>
+  <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+  <requestHandler name="/admin" class="solr.admin.AdminHandlers" />
+  <requestHandler name="/analysis/field" class="solr.FieldAnalysisRequestHandler" startup="lazy" />
+</config>
+

@@ -1,0 +1,40 @@
+<add>
+  <doc>
+    <field name="id">email1</field>
+    <field name="addr_from">Fulan AlFulani &lt;fulan@acme.example.com&gt;</field>
+    <field name="addr_to">Kari Nordmann &lt;kari@acme.example.com&gt;</field>
+    <field name="subject">Kari, we need more Junior Java engineers</field>
+    <field name="date">5 Jan 2012</field>
+    <field name="message">Kari, some of our Java engineers left at the end of last year. Can you please advertise some open positions at Junior level. Thanks, Fulan</field>
+  </doc>
+  <doc>
+    <field name="id">email2</field>
+    <field name="addr_from"><![CDATA[Kari Nordmann <kari@acme.example.com>]]></field>
+    <field name="addr_to"><![CDATA[Maija Meikäläinen <maija@acme.example.com>]]></field>
+    <field name="addr_to"><![CDATA[Ivan Ivanovich Ivanov <ivan@acme.example.com>]]></field>
+    <field name="subject">Updating vacancy description</field>
+    <field name="date">6 Jan 2012</field>
+    <field name="message">Maija, Vania I need you to work together to update the description for Junior Java programmers. Fulan wants to hire some more for both New York and San Francisco location. See if we can wrap this up in a week. Thank you, Kari</field>
+    <field name="priority">2</field>
+  </doc>
+  <doc>
+      <field name="id">email3</field>
+      <field name="addr_from"><![CDATA[Maija Meikäläinen <maija@acme.example.com>]]></field>
+      <field name="addr_to"><![CDATA[Kari Nordmann <kari@acme.example.com>]]></field>
+      <field name="addr_cc"><![CDATA[Ivan Ivanovich Ivanov <vania@home.example.com>]]></field>
+      <field name="subject">Re: Updating vacancy description</field>
+      <field name="date">10 Jan 2012</field>
+      <field name="message">Kari, please find the proposed description attached. Vania is not feeling too well today. He will check his home email, if something is urgent. Salut, Maija</field>
+    </doc>
+    <doc>
+      <field name="id">email4</field>
+      <field name="addr_from"><![CDATA[Alexandre Rafalovitch <alex@home.example.com>]]></field>
+      <field name="addr_to"><![CDATA[Maria Rafalovitch <masha@home.example.com>]]></field>
+      <field name="subject">Интересная работа в Австралии</field>
+      <field name="date">6 Mar 2012</field>
+      <field name="message"> <![CDATA[Маша,
+    Вчера по электроной почте мне прислали очень интересную вакансию. И прямо по специальности. Но в Австралии! Хочешь пожить в тёплой стране несколько лет? Давай обговорим всё это вечером.
+    Целую, Саша.
+    ]]> </field>
+    </doc>
+</add>

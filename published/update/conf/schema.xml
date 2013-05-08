@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema version="1.5">
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
+    <field name="addr_from" type="string" indexed="true" stored="true" required="true"/>
+    <field name="addr_to" type="string" indexed="true" stored="true" required="true"/>
+    <field name="subject" type="string" indexed="true" stored="true" required="true"/>
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+    <field name="subject_copy" type="string" indexed="true" stored="true" required="true"/>
+    <copyField source="subject" dest="subject_copy"/>
+    <field name="priority" type="long" indexed="true" stored="true" />
+    <field name="addr_cc" type="string" indexed="true" stored="true" multiValued="true" />
+  </fields>
+  <uniqueKey>id</uniqueKey>
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+  </types>
+</schema>
+

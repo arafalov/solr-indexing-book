@@ -1,0 +1,3 @@
+id,addr_from,addr_to,subject
+email1,fulan@acme.example.com,kari@acme.example.com,"Kari, we need more Junior Java engineers"
+email2,kari@acme.example.com,maija@acme.example.com;ivan@acme.example.com,"Updating vacancy description"

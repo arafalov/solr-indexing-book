@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<solr>
+  <cores adminPath="/admin/cores">
+    <core name="collection1" instanceDir="collection1" />
+    <core name="multivalued" instanceDir="multivalued" />
+    <core name="xml" instanceDir="xml" />
+    <core name="text1" instanceDir="text1" />
+    <core name="text2" instanceDir="text2" />
+    <core name="cell" instanceDir="cell" />
+    <core name="dihxml" instanceDir="dihxml" />
+    <core name="dihdb" instanceDir="dihdb" />
+    <core name="commit" instanceDir="commit" />
+    <core name="processors" instanceDir="processors" />
+    <core name="solrj" instanceDir="solrj" />
+    <core name="update" instanceDir="update" />
+    <core name="languages" instanceDir="languages" />
+  </cores>
+</solr>
+

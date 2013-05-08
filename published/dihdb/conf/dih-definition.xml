@@ -1,0 +1,41 @@
+<dataConfig>
+  <dataSource name="fileDS" type="FileDataSource" encoding="UTF-8"/>
+  <dataSource name="dbDS"
+    type="JdbcDataSource"
+    driver="org.apache.derby.jdbc.EmbeddedDriver"
+    url="jdbc:derby:${solr.solr.home}/dihdb/dihdb-content"
+    user="app" password="app" />
+  <document>
+    <entity name="emails" 
+       dataSource="fileDS"
+       processor="XPathEntityProcessor"
+       url="${solr.solr.home}/dihxml/updatexml.xml"
+       forEach="/add/doc"
+       transformer="TemplateTransformer, DateFormatTransformer"
+       preImportDeleteQuery="type:acme"
+    >
+      <field column="id" xpath="/add/doc/field[@name='id']"/>
+      <field column="addr_from" xpath="/add/doc/field[@name='addr_from']"/>
+      <field column="addr_to" xpath="/add/doc/field[@name='addr_to']"/>
+      <field column="addr_cc" xpath="/add/doc/field[@name='addr_cc']"/>
+      <field column="subject" xpath="/add/doc/field[@name='subject']"/>
+      <field column="message" xpath="/add/doc/field[@name='message']"/>
+      <field column="date" xpath="/add/doc/field[@name='date']" dateTimeFormat="dd MMM yyyy"/>
+      <field column="priority"  xpath="/add/doc/field[@name='priority']"/>
+      <field column="type" template="acme"/>
+    </entity>
+    <entity name="vacancy-alerts" 
+      dataSource="dbDS"
+      query="select * from ALERTS"
+      transformer="TemplateTransformer,DateFormatTransformer"
+      preImportDeleteQuery="type:vacancy-alert" >
+      <field name="id" column="ID" />
+      <field name="addr_from" column="FROM" />
+      <field name="addr_to" column="TO" />
+      <field name="subject" column="SUBJECT" />
+      <field name="message" column="MESSAGE" />
+      <field name="date" column="DATE" dateTimeFormat="dd MMM yyyy"/>
+      <field column="type" template="vacancy-alert"/>
+    </entity>
+  </document>
+</dataConfig>
